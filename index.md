@@ -24,7 +24,7 @@ My current research focuses on **matroid theory**, particularly on the algebraic
 
 ## 📄 Resume
 
-- [Download my CV (PDF)](/assets/yych_CV.pdf)
+- [Download my CV (PDF)](/yych_CV.pdf)
 
 ---
 
