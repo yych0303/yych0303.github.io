@@ -34,7 +34,7 @@ My current research focuses on the algebraic and topological structures arising 
 ## 🧪 Experience
 
 - **Summer Research Intern**, Academia Sinica (2024)  
-  _Project: Algebraic Proofs in Agda_  
+  _Project: Bridging Combinatorial and Algebraic proof: An Algebraic Approach with Agda  
   _Advisor: Dr. Liang-Ting Chen (陳亮廷)_
 
 - **Teaching Assistant**, Calculus II, NYCU (Spring 2024)  
