@@ -1,12 +1,4 @@
-# Yu-Chuan YU
-
----
-layout: home
-title: "Yu-Chuan YU 游棫荃"
----
-
-> “Constructive clarity through formal mathematics.”
-
+# Yu-Chuan YU 游棫荃
 I am a master’s student at the **Institute of Applied Mathematics**,  
 **National Yang Ming Chiao Tung University (NYCU)**, Taiwan.
 
@@ -25,8 +17,7 @@ My current research focuses on **matroid theory**, particularly on the algebraic
 
 ## 🧠 Background
 
-- B.Sc. in Mathematics and B.Eng. in Computer Science,  
-  National Changhua University of Education  
+- B.Sc. in Mathematics and B.Eng. in Computer Science, National Changhua University of Education  
 - Intern at Academia Sinica (2024), under the guidance of Dr. Liang-Ting Chen  
 - Actively involved in logic and computation workshops (e.g., FLOLAC, NCTS)
 
