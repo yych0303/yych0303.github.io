@@ -24,7 +24,7 @@ My current research focuses on the algebraic and topological structures arising 
 ## 🎓 Education
 
 - **M.S. Applied Mathematics**, NYCU (2024– )  
-  _Advisor: Prof. Chi Ho Yuen (阮志豪)_
+  Advisor: Prof. Chi Ho Yuen (阮志豪)_
 
 - **B.Sc. Mathematics**, **B.Eng. Computer Science**,  
   National Changhua University of Education (2020–2024)  
@@ -34,8 +34,8 @@ My current research focuses on the algebraic and topological structures arising 
 ## 🧪 Experience
 
 - **Summer Research Intern**, Academia Sinica (2024)  
-  _Project: Bridging Combinatorial and Algebraic proof: An Algebraic Approach with Agda  
-  _Advisor: Dr. Liang-Ting Chen (陳亮廷)_
+  Project: Bridging Combinatorial and Algebraic proof: An Algebraic Approach with Agda  
+  Advisor: Dr. Liang-Ting Chen (陳亮廷)_
 
 - **Teaching Assistant**, Calculus II, NYCU (Spring 2024)  
 - **Teaching Assistant**, Discrete Mathematics, NYCU (Fall 2024)
