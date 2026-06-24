@@ -1,0 +1,1362 @@
+<style>
+  #pg23-tictactoe {
+    --pg-text: #142943;
+    --pg-muted: #687386;
+    --pg-line: #c3c9d1;
+    --pg-line-hover: #536273;
+    --pg-border: #d9dee6;
+    --pg-surface: #ffffff;
+    --pg-hover: #f2f4f7;
+    --pg-infinity: #f5f7fa;
+
+    --pg-o-color: #2563eb;
+    --pg-o-background: rgba(37, 99, 235, 0.12);
+
+    --pg-x-color: #dc2626;
+    --pg-x-background: rgba(220, 38, 38, 0.12);
+
+    box-sizing: border-box;
+    width: min(100%, 760px);
+    margin: 1.5rem auto;
+    padding: clamp(1.2rem, 4vw, 2.2rem);
+    border: 1px solid var(--pg-border);
+    border-radius: 20px;
+    background: var(--pg-surface);
+    color: var(--pg-text);
+  }
+
+  #pg23-tictactoe *,
+  #pg23-tictactoe *::before,
+  #pg23-tictactoe *::after {
+    box-sizing: border-box;
+  }
+
+  #pg23-tictactoe h3 {
+    margin: 0 0 0.45rem;
+    color: var(--pg-text);
+    font-size: 1.4rem;
+  }
+
+  #pg23-tictactoe .pg-description {
+    margin: 0 0 0.65rem;
+    color: var(--pg-muted);
+    line-height: 1.6;
+  }
+
+  #pg23-tictactoe .pg-view-info {
+    min-height: 1.4em;
+    margin: 0 0 0.35rem;
+    color: var(--pg-muted);
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  #pg23-tictactoe .pg-board-wrap {
+    width: min(100%, 540px);
+    margin: 0 auto;
+  }
+
+  #pg23-tictactoe svg.pg-board {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1 !important;
+    overflow: visible;
+  }
+
+  #pg23-tictactoe .pg-guide {
+    fill: none;
+    stroke: var(--pg-line);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+  }
+
+  #pg23-tictactoe .pg-guide-group {
+    outline: none;
+  }
+
+  #pg23-tictactoe .pg-guide-path {
+    fill: none;
+    stroke: var(--pg-line);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.5;
+    vector-effect: non-scaling-stroke;
+    pointer-events: none;
+    transition:
+      stroke 140ms ease,
+      stroke-width 140ms ease,
+      opacity 140ms ease;
+  }
+
+  #pg23-tictactoe .pg-guide-group.is-axis .pg-guide-path {
+    opacity: 0.72;
+  }
+
+  #pg23-tictactoe .pg-guide-hitbox {
+    fill: none;
+    stroke: transparent;
+    stroke-width: 20;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    cursor: pointer;
+    pointer-events: stroke;
+  }
+
+  #pg23-tictactoe .pg-guide-group:hover .pg-guide-path,
+  #pg23-tictactoe .pg-guide-group:focus-visible .pg-guide-path {
+    stroke: var(--pg-line-hover);
+    stroke-width: 4;
+    opacity: 1;
+  }
+
+  #pg23-tictactoe .pg-point {
+    cursor: pointer;
+    outline: none;
+  }
+
+  #pg23-tictactoe .pg-point circle {
+    fill: var(--pg-surface);
+    stroke: var(--pg-text);
+    stroke-width: 2.3;
+    vector-effect: non-scaling-stroke;
+    transform-box: fill-box;
+    transform-origin: center;
+    transition:
+      transform 150ms ease,
+      fill 150ms ease,
+      stroke 150ms ease,
+      stroke-width 150ms ease;
+  }
+
+  #pg23-tictactoe .pg-point.is-infinity circle {
+    fill: var(--pg-infinity);
+  }
+
+  #pg23-tictactoe .pg-point:hover circle,
+  #pg23-tictactoe .pg-point:focus-visible circle {
+    fill: var(--pg-hover);
+    transform: scale(1.08);
+  }
+
+  #pg23-tictactoe .pg-point.has-o circle {
+    stroke: var(--pg-o-color);
+  }
+
+  #pg23-tictactoe .pg-point.has-x circle {
+    stroke: var(--pg-x-color);
+  }
+
+  #pg23-tictactoe .pg-point.has-o.is-winning circle {
+    fill: var(--pg-o-background);
+    stroke: var(--pg-o-color);
+    stroke-width: 4;
+  }
+
+  #pg23-tictactoe .pg-point.has-x.is-winning circle {
+    fill: var(--pg-x-background);
+    stroke: var(--pg-x-color);
+    stroke-width: 4;
+  }
+
+  #pg23-tictactoe .pg-point.is-winning {
+    animation: pg23-winning-pulse 1.1s ease-in-out infinite alternate;
+  }
+
+  @keyframes pg23-winning-pulse {
+    from {
+      opacity: 0.78;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  #pg23-tictactoe .pg-mark {
+    fill: var(--pg-text);
+    font-family:
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      sans-serif;
+    font-size: 25px;
+    font-weight: 650;
+    text-anchor: middle;
+    dominant-baseline: central;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  #pg23-tictactoe .pg-mark.is-o {
+    fill: var(--pg-o-color);
+  }
+
+  #pg23-tictactoe .pg-mark.is-x {
+    fill: var(--pg-x-color);
+  }
+
+  #pg23-tictactoe .pg-mark-symbol {
+    font-size: 25px;
+    font-weight: 650;
+  }
+
+  #pg23-tictactoe .pg-mark-index {
+    font-size: 12px;
+    font-weight: 750;
+  }
+
+  #pg23-tictactoe .pg-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.45rem 1rem;
+    margin: 0.25rem 0 0.65rem;
+    color: var(--pg-muted);
+    font-size: 0.88rem;
+  }
+
+  #pg23-tictactoe .pg-legend span {
+    white-space: nowrap;
+  }
+
+  #pg23-tictactoe .pg-win-info {
+    min-height: 1.5em;
+    margin: 0.15rem 0 0.7rem;
+    text-align: center;
+    font-size: 0.92rem;
+    font-weight: 650;
+  }
+
+  #pg23-tictactoe .pg-win-info.is-o {
+    color: var(--pg-o-color);
+  }
+
+  #pg23-tictactoe .pg-win-info.is-x {
+    color: var(--pg-x-color);
+  }
+
+  #pg23-tictactoe .pg-footer {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+  }
+
+  #pg23-tictactoe .pg-status {
+    min-height: 1.5em;
+    margin: 0;
+    color: var(--pg-text);
+    font-weight: 650;
+  }
+
+  #pg23-tictactoe .pg-status.is-o {
+    color: var(--pg-o-color);
+  }
+
+  #pg23-tictactoe .pg-status.is-x {
+    color: var(--pg-x-color);
+  }
+
+  #pg23-tictactoe .pg-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+
+  #pg23-tictactoe .pg-button {
+    appearance: none;
+    width: 100%;
+    min-height: 42px;
+    border: 1px solid var(--pg-border);
+    border-radius: 999px;
+    padding: 0.72rem 0.9rem;
+    background: var(--pg-surface);
+    color: var(--pg-text);
+    font: inherit;
+    font-size: 0.88rem;
+    font-weight: 650;
+    line-height: 1.2;
+    white-space: normal;
+    text-align: center;
+    cursor: pointer;
+    transition:
+      opacity 140ms ease,
+      background 140ms ease,
+      transform 140ms ease;
+  }
+
+  #pg23-tictactoe .pg-button:hover:not(:disabled) {
+    background: var(--pg-hover);
+    transform: translateY(-1px);
+  }
+
+  #pg23-tictactoe .pg-button:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  #pg23-tictactoe .pg-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.42;
+  }
+
+  #pg23-tictactoe .pg-reset {
+    grid-column: 2;
+    border-color: var(--pg-text);
+    background: var(--pg-text);
+    color: #ffffff;
+  }
+
+  #pg23-tictactoe .pg-reset:hover:not(:disabled) {
+    background: var(--pg-text);
+    opacity: 0.85;
+  }
+
+  @media (max-width: 560px) {
+    #pg23-tictactoe {
+      padding: 1.05rem;
+    }
+
+    #pg23-tictactoe .pg-actions {
+      grid-template-columns: 1fr;
+    }
+
+    #pg23-tictactoe .pg-reset {
+      grid-column: auto;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    #pg23-tictactoe {
+      --pg-text: #edf2f7;
+      --pg-muted: #b4bbc5;
+      --pg-line: #737b86;
+      --pg-line-hover: #d9dee6;
+      --pg-border: #444b55;
+      --pg-surface: #20242a;
+      --pg-hover: #30363d;
+      --pg-infinity: #282e35;
+
+      --pg-o-color: #60a5fa;
+      --pg-o-background: rgba(96, 165, 250, 0.16);
+
+      --pg-x-color: #f87171;
+      --pg-x-background: rgba(248, 113, 113, 0.16);
+    }
+  }
+</style>
+
+<div id="pg23-tictactoe">
+  <h3>Projective Tic-Tac-Toe over F₃</h3>
+
+  <p class="pg-description">
+    Take turns choosing points. The first player to occupy all four
+    points of a projective line wins. Click any affine line to move it
+    to the line at infinity.
+  </p>
+
+  <p class="pg-view-info">
+    Affine view 1 of 13
+  </p>
+
+  <div class="pg-board-wrap">
+    <svg
+      class="pg-board"
+      viewBox="0 0 500 500"
+      width="500"
+      height="500"
+      preserveAspectRatio="xMidYMid meet"
+      role="img"
+      aria-label="Projective plane of order three tic-tac-toe board"
+    >
+      <g class="pg-guides"></g>
+      <g class="pg-points"></g>
+    </svg>
+  </div>
+
+  <div class="pg-legend">
+    <span>↕ vertical</span>
+    <span>↔ horizontal</span>
+    <span>↗ slope 1</span>
+    <span>↘ slope −1</span>
+  </div>
+
+  <p class="pg-win-info" aria-live="polite"></p>
+
+  <div class="pg-footer">
+    <p class="pg-status is-o" aria-live="polite">
+      O's turn
+    </p>
+
+    <div class="pg-actions">
+      <button class="pg-button pg-change-view" type="button">
+        Change view
+      </button>
+
+      <button class="pg-button pg-reset-chart" type="button">
+        Reset chart
+      </button>
+
+      <button
+        class="pg-button pg-straighten"
+        type="button"
+        disabled
+      >
+        Move winning line to infinity
+      </button>
+
+      <button class="pg-button pg-reset" type="button">
+        New game
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const game = document.getElementById("pg23-tictactoe");
+
+  if (!game || game.dataset.initialized === "true") {
+    return;
+  }
+
+  game.dataset.initialized = "true";
+
+  const svgNamespace = "http://www.w3.org/2000/svg";
+
+  const guidesLayer = game.querySelector(".pg-guides");
+  const pointsLayer = game.querySelector(".pg-points");
+
+  const status = game.querySelector(".pg-status");
+  const winInfo = game.querySelector(".pg-win-info");
+  const viewInfo = game.querySelector(".pg-view-info");
+
+  const changeViewButton =
+    game.querySelector(".pg-change-view");
+
+  const resetChartButton =
+    game.querySelector(".pg-reset-chart");
+
+  const straightenButton =
+    game.querySelector(".pg-straighten");
+
+  const resetButton =
+    game.querySelector(".pg-reset");
+
+  function mod3(value) {
+    return ((value % 3) + 3) % 3;
+  }
+
+  function dot(left, right) {
+    return mod3(
+      left[0] * right[0] +
+      left[1] * right[1] +
+      left[2] * right[2]
+    );
+  }
+
+  function normalizeProjective(vector) {
+    const normalized = vector.map(mod3);
+
+    const firstNonzeroIndex =
+      normalized.findIndex(value => value !== 0);
+
+    if (firstNonzeroIndex === -1) {
+      throw new Error(
+        "The zero vector is not a projective point."
+      );
+    }
+
+    const leadingValue =
+      normalized[firstNonzeroIndex];
+
+    const inverse =
+      leadingValue === 1 ? 1 : 2;
+
+    return normalized.map(value =>
+      mod3(value * inverse)
+    );
+  }
+
+  function vectorKey(vector) {
+    return normalizeProjective(vector).join("");
+  }
+
+  function determinant(matrix) {
+    const [
+      [a, b, c],
+      [d, e, f],
+      [g, h, i]
+    ] = matrix;
+
+    return mod3(
+      a * (e * i - f * h) -
+      b * (d * i - f * g) +
+      c * (d * h - e * g)
+    );
+  }
+
+  function multiplyMatrixVector(matrix, vector) {
+    return matrix.map(row => dot(row, vector));
+  }
+
+  function multiplyTransposeVector(matrix, vector) {
+    return [
+      mod3(
+        matrix[0][0] * vector[0] +
+        matrix[1][0] * vector[1] +
+        matrix[2][0] * vector[2]
+      ),
+      mod3(
+        matrix[0][1] * vector[0] +
+        matrix[1][1] * vector[1] +
+        matrix[2][1] * vector[2]
+      ),
+      mod3(
+        matrix[0][2] * vector[0] +
+        matrix[1][2] * vector[1] +
+        matrix[2][2] * vector[2]
+      )
+    ];
+  }
+
+  function createSvgElement(tag, attributes = {}) {
+    const element = document.createElementNS(
+      svgNamespace,
+      tag
+    );
+
+    Object.entries(attributes).forEach(([name, value]) => {
+      element.setAttribute(name, String(value));
+    });
+
+    return element;
+  }
+
+  function enumerateProjectiveVectors(prefix) {
+    const vectors = new Map();
+
+    for (let x = 0; x < 3; x++) {
+      for (let y = 0; y < 3; y++) {
+        for (let z = 0; z < 3; z++) {
+          if (x === 0 && y === 0 && z === 0) {
+            continue;
+          }
+
+          const vector =
+            normalizeProjective([x, y, z]);
+
+          const key = vector.join("");
+
+          if (!vectors.has(key)) {
+            vectors.set(key, {
+              id: `${prefix}-${key}`,
+              vector
+            });
+          }
+        }
+      }
+    }
+
+    return [...vectors.values()];
+  }
+
+  const projectivePoints =
+    enumerateProjectiveVectors("p");
+
+  const projectiveLines =
+    enumerateProjectiveVectors("l").map(line => ({
+      ...line,
+      pointIds: projectivePoints
+        .filter(point =>
+          dot(line.vector, point.vector) === 0
+        )
+        .map(point => point.id)
+    }));
+
+  function matrixWithPrescribedRow(
+    prescribedVector,
+    rowIndex
+  ) {
+    const candidates = [
+      [1, 0, 0],
+      [0, 1, 0],
+      [0, 0, 1],
+      [1, 1, 0],
+      [1, 0, 1],
+      [0, 1, 1],
+      [1, 1, 1],
+      [1, 2, 0],
+      [1, 0, 2],
+      [0, 1, 2],
+      [1, 2, 1],
+      [1, 1, 2],
+      [1, 2, 2]
+    ];
+
+    for (const first of candidates) {
+      for (const second of candidates) {
+        const rows = new Array(3);
+
+        rows[rowIndex] =
+          normalizeProjective(prescribedVector);
+
+        const freeIndices =
+          [0, 1, 2].filter(index =>
+            index !== rowIndex
+          );
+
+        rows[freeIndices[0]] = first;
+        rows[freeIndices[1]] = second;
+
+        if (determinant(rows) !== 0) {
+          return rows;
+        }
+      }
+    }
+
+    throw new Error(
+      "Could not construct an invertible view matrix."
+    );
+  }
+
+  const views = projectiveLines.map(line => ({
+    infinityLineId: line.id,
+    matrix: matrixWithPrescribedRow(
+      line.vector,
+      2
+    )
+  }));
+
+  const affinePositions = {
+    "0,2": { x: 150, y: 95 },
+    "1,2": { x: 250, y: 95 },
+    "2,2": { x: 350, y: 95 },
+
+    "0,1": { x: 150, y: 195 },
+    "1,1": { x: 250, y: 195 },
+    "2,1": { x: 350, y: 195 },
+
+    "0,0": { x: 150, y: 295 },
+    "1,0": { x: 250, y: 295 },
+    "2,0": { x: 350, y: 295 }
+  };
+
+  const infinityPositions = {
+    "010": {
+      x: 100,
+      y: 420,
+      symbol: "↕",
+      name: "vertical"
+    },
+
+    "100": {
+      x: 200,
+      y: 420,
+      symbol: "↔",
+      name: "horizontal"
+    },
+
+    "110": {
+      x: 300,
+      y: 420,
+      symbol: "↗",
+      name: "slope 1"
+    },
+
+    "120": {
+      x: 400,
+      y: 420,
+      symbol: "↘",
+      name: "slope −1"
+    }
+  };
+
+  let board = {};
+  let currentPlayer = "O";
+  let moveNumber = 0;
+  let gameOver = false;
+
+  let currentViewIndex = 0;
+  let customViewMatrix = null;
+  let customViewMessage = "";
+
+  let winningLineIndex = null;
+  let winningPlayer = null;
+
+  function currentViewMatrix() {
+    return (
+      customViewMatrix ||
+      views[currentViewIndex].matrix
+    );
+  }
+
+  function displayedPoint(point) {
+    const transformed =
+      normalizeProjective(
+        multiplyMatrixVector(
+          currentViewMatrix(),
+          point.vector
+        )
+      );
+
+    const [x, y, z] = transformed;
+
+    if (z !== 0) {
+      const inverseZ = z === 1 ? 1 : 2;
+
+      const affineX = mod3(x * inverseZ);
+      const affineY = mod3(y * inverseZ);
+
+      return {
+        kind: "affine",
+        coordinate: [affineX, affineY],
+        ...affinePositions[
+          `${affineX},${affineY}`
+        ]
+      };
+    }
+
+    const key = vectorKey(transformed);
+    const infinityPosition =
+      infinityPositions[key];
+
+    if (!infinityPosition) {
+      throw new Error(
+        `Unknown point at infinity: ${key}`
+      );
+    }
+
+    return {
+      kind: "infinity",
+      directionKey: key,
+      ...infinityPosition
+    };
+  }
+
+  function sendDisplayedLineToInfinity(
+    displayedLineVector,
+    label
+  ) {
+    const abstractLineVector =
+      normalizeProjective(
+        multiplyTransposeVector(
+          currentViewMatrix(),
+          displayedLineVector
+        )
+      );
+
+    customViewMatrix =
+      matrixWithPrescribedRow(
+        abstractLineVector,
+        2
+      );
+
+    customViewMessage =
+      `${label} is now the line at infinity.`;
+
+    redraw();
+  }
+
+  function createSelectablePath({
+    pathData,
+    lineVector,
+    label,
+    axis = false
+  }) {
+    const group = createSvgElement("g", {
+      class: [
+        "pg-guide-group",
+        axis ? "is-axis" : "is-diagonal"
+      ].join(" "),
+      tabindex: "0",
+      role: "button",
+      "aria-label":
+        `${label}; move this projective line to infinity`
+    });
+
+    const visiblePath = createSvgElement("path", {
+      d: pathData,
+      class: "pg-guide-path"
+    });
+
+    const hitbox = createSvgElement("path", {
+      d: pathData,
+      class: "pg-guide-hitbox"
+    });
+
+    const chooseLine = () => {
+      sendDisplayedLineToInfinity(
+        lineVector,
+        label
+      );
+    };
+
+    hitbox.addEventListener(
+      "click",
+      chooseLine
+    );
+
+    group.addEventListener(
+      "keydown",
+      event => {
+        if (
+          event.key === "Enter" ||
+          event.key === " "
+        ) {
+          event.preventDefault();
+          chooseLine();
+        }
+      }
+    );
+
+    group.append(
+      visiblePath,
+      hitbox
+    );
+
+    guidesLayer.appendChild(group);
+  }
+  function clippedDiagonalPath(
+    slope,
+    intercept,
+    {
+      xMin = 120,
+      xMax = 380,
+      yMin = 65,
+      yMax = 325
+    } = {}
+  ) {
+    const candidates = [];
+
+    function addPoint(x, y) {
+      const epsilon = 0.001;
+
+      if (
+        Number.isFinite(x) &&
+        Number.isFinite(y) &&
+        x >= xMin - epsilon &&
+        x <= xMax + epsilon &&
+        y >= yMin - epsilon &&
+        y <= yMax + epsilon
+      ) {
+        const duplicate = candidates.some(point =>
+          Math.abs(point.x - x) < epsilon &&
+          Math.abs(point.y - y) < epsilon
+        );
+
+        if (!duplicate) {
+          candidates.push({ x, y });
+        }
+      }
+    }
+
+    addPoint(
+      xMin,
+      slope * xMin + intercept
+    );
+
+    addPoint(
+      xMax,
+      slope * xMax + intercept
+    );
+
+    addPoint(
+      (yMin - intercept) / slope,
+      yMin
+    );
+
+    addPoint(
+      (yMax - intercept) / slope,
+      yMax
+    );
+
+    if (candidates.length < 2) {
+      return "";
+    }
+
+    let first = candidates[0];
+    let second = candidates[1];
+    let maximumDistance = -1;
+
+    for (let i = 0; i < candidates.length; i++) {
+      for (let j = i + 1; j < candidates.length; j++) {
+        const dx =
+          candidates[i].x -
+          candidates[j].x;
+
+        const dy =
+          candidates[i].y -
+          candidates[j].y;
+
+        const distance =
+          dx * dx + dy * dy;
+
+        if (distance > maximumDistance) {
+          maximumDistance = distance;
+          first = candidates[i];
+          second = candidates[j];
+        }
+      }
+    }
+
+    return (
+      `M ${first.x} ${first.y} ` +
+      `L ${second.x} ${second.y}`
+    );
+  }
+
+  function createWrappedDiagonal({
+    slopeMod3,
+    offset,
+    label
+  }) {
+    const screenSlope =
+      slopeMod3 === 1 ? -1 : 1;
+
+    const intercepts = new Set();
+
+    for (let x = 0; x < 3; x++) {
+      const finiteY =
+        mod3(slopeMod3 * x + offset);
+
+      const screenX =
+        affinePositions[
+          `${x},${finiteY}`
+        ].x;
+
+      const screenY =
+        affinePositions[
+          `${x},${finiteY}`
+        ].y;
+
+      const intercept =
+        screenY -
+        screenSlope * screenX;
+
+      intercepts.add(intercept);
+    }
+
+    const pathData = [...intercepts]
+      .map(intercept =>
+        clippedDiagonalPath(
+          screenSlope,
+          intercept
+        )
+      )
+      .filter(Boolean)
+      .join(" ");
+
+    const lineVector =
+      slopeMod3 === 1
+        ? [2, 1, mod3(-offset)]
+        : [1, 1, mod3(-offset)];
+
+    createSelectablePath({
+      pathData,
+      lineVector,
+      label
+    });
+  }
+
+  function drawGuides() {
+    guidesLayer.innerHTML = "";
+
+    [0, 1, 2].forEach((c, index) => {
+      const x =
+        [150, 250, 350][index];
+
+      createSelectablePath({
+        pathData:
+          `M ${x} 65 L ${x} 325`,
+        lineVector: [
+          1,
+          0,
+          mod3(-c)
+        ],
+        label: `Vertical line x = ${c}`,
+        axis: true
+      });
+    });
+
+    [2, 1, 0].forEach((b, index) => {
+      const y =
+        [95, 195, 295][index];
+
+      createSelectablePath({
+        pathData:
+          `M 120 ${y} L 380 ${y}`,
+        lineVector: [
+          0,
+          1,
+          mod3(-b)
+        ],
+        label: `Horizontal line y = ${b}`,
+        axis: true
+      });
+    });
+
+    for (let b = 0; b < 3; b++) {
+      createWrappedDiagonal({
+        slopeMod3: 1,
+        offset: b,
+        label:
+          `Slope 1 line with offset ${b}`
+      });
+    }
+
+    for (let b = 0; b < 3; b++) {
+      createWrappedDiagonal({
+        slopeMod3: 2,
+        offset: b,
+        label:
+          `Slope minus 1 line with offset ${b}`
+      });
+    }
+
+    guidesLayer.appendChild(
+      createSvgElement("line", {
+        x1: 80,
+        y1: 420,
+        x2: 420,
+        y2: 420,
+        class: "pg-guide"
+      })
+    );
+  }
+
+  function drawPoints() {
+    pointsLayer.innerHTML = "";
+
+    projectivePoints.forEach(point => {
+      const displayed =
+        displayedPoint(point);
+
+      const move =
+        board[point.id] || null;
+
+      const mark =
+        move?.player || "";
+
+      const moveIndex =
+        move?.move || null;
+
+      const classNames = [
+        "pg-point",
+        displayed.kind === "infinity"
+          ? "is-infinity"
+          : "",
+        mark === "O" ? "has-o" : "",
+        mark === "X" ? "has-x" : ""
+      ].filter(Boolean);
+
+      if (
+        winningLineIndex !== null &&
+        projectiveLines[
+          winningLineIndex
+        ].pointIds.includes(point.id)
+      ) {
+        classNames.push("is-winning");
+      }
+
+      const group = createSvgElement("g", {
+        class: classNames.join(" "),
+        tabindex: "0",
+        role: "button",
+        "aria-label": mark
+          ? `Point occupied by ${mark}, move ${moveIndex}`
+          : displayed.kind === "infinity"
+            ? `Empty point at infinity: ${displayed.name}`
+            : `Empty affine point ${displayed.coordinate.join(", ")}`
+      });
+
+      const circle = createSvgElement("circle", {
+        cx: displayed.x,
+        cy: displayed.y,
+        r: 24
+      });
+
+      const markClass = [
+        "pg-mark",
+        mark === "O" ? "is-o" : "",
+        mark === "X" ? "is-x" : ""
+      ].filter(Boolean).join(" ");
+
+      const text = createSvgElement("text", {
+        x: displayed.x,
+        y: displayed.y,
+        class: markClass
+      });
+
+      if (mark) {
+        const symbol = createSvgElement("tspan", {
+          class: "pg-mark-symbol"
+        });
+
+        symbol.textContent = mark;
+
+        const index = createSvgElement("tspan", {
+          class: "pg-mark-index",
+          dx: "2",
+          dy: "7"
+        });
+
+        index.textContent = moveIndex;
+
+        text.append(
+          symbol,
+          index
+        );
+      } else if (
+        displayed.kind === "infinity"
+      ) {
+        text.textContent =
+          displayed.symbol;
+      }
+
+      group.append(
+        circle,
+        text
+      );
+
+      group.addEventListener(
+        "click",
+        () => {
+          play(point.id);
+        }
+      );
+
+      group.addEventListener(
+        "keydown",
+        event => {
+          if (
+            event.key === "Enter" ||
+            event.key === " "
+          ) {
+            event.preventDefault();
+            play(point.id);
+          }
+        }
+      );
+
+      pointsLayer.appendChild(group);
+    });
+  }
+
+  function findWinningLine(player) {
+    return projectiveLines.findIndex(line =>
+      line.pointIds.every(
+        pointId =>
+          board[pointId]?.player === player
+      )
+    );
+  }
+
+  function updateStatus(
+    text,
+    player = null
+  ) {
+    status.textContent = text;
+
+    status.classList.remove(
+      "is-o",
+      "is-x"
+    );
+
+    if (player === "O") {
+      status.classList.add("is-o");
+    }
+
+    if (player === "X") {
+      status.classList.add("is-x");
+    }
+  }
+
+  function updateWinInfo() {
+    winInfo.textContent = "";
+
+    winInfo.classList.remove(
+      "is-o",
+      "is-x"
+    );
+
+    straightenButton.disabled =
+      winningLineIndex === null;
+
+    if (
+      winningLineIndex === null ||
+      !winningPlayer
+    ) {
+      return;
+    }
+
+    winInfo.textContent =
+      `${winningPlayer} completed a projective line.`;
+
+    winInfo.classList.add(
+      winningPlayer === "O"
+        ? "is-o"
+        : "is-x"
+    );
+  }
+
+  function updateViewInfo() {
+    if (customViewMatrix) {
+      viewInfo.textContent =
+        customViewMessage ||
+        "The selected projective line is now the line at infinity.";
+
+      return;
+    }
+
+    viewInfo.textContent =
+      `Affine view ${currentViewIndex + 1} of ${views.length}`;
+  }
+
+  function redraw() {
+    drawGuides();
+    drawPoints();
+    updateWinInfo();
+    updateViewInfo();
+  }
+
+  function play(pointId) {
+    if (
+      gameOver ||
+      board[pointId]
+    ) {
+      return;
+    }
+
+    moveNumber += 1;
+
+    board[pointId] = {
+      player: currentPlayer,
+      move: moveNumber
+    };
+
+    const foundLine =
+      findWinningLine(currentPlayer);
+
+    if (foundLine !== -1) {
+      winningLineIndex =
+        foundLine;
+
+      winningPlayer =
+        currentPlayer;
+
+      gameOver = true;
+
+      updateStatus(
+        `${currentPlayer} wins!`,
+        currentPlayer
+      );
+    } else if (
+      Object.keys(board).length ===
+      projectivePoints.length
+    ) {
+      gameOver = true;
+      updateStatus("Draw.");
+    } else {
+      currentPlayer =
+        currentPlayer === "O"
+          ? "X"
+          : "O";
+
+      updateStatus(
+        `${currentPlayer}'s turn`,
+        currentPlayer
+      );
+    }
+
+    redraw();
+  }
+
+  function changeView() {
+    customViewMatrix = null;
+    customViewMessage = "";
+
+    currentViewIndex =
+      (currentViewIndex + 1) %
+      views.length;
+
+    redraw();
+  }
+
+  function resetChart() {
+    customViewMatrix = null;
+    customViewMessage = "";
+    currentViewIndex = 0;
+
+    redraw();
+  }
+
+  function moveWinningLineToInfinity() {
+    if (winningLineIndex === null) {
+      return;
+    }
+
+    const winningLine =
+      projectiveLines[winningLineIndex];
+
+    customViewMatrix =
+      matrixWithPrescribedRow(
+        winningLine.vector,
+        2
+      );
+
+    customViewMessage =
+      "The winning line is now the line at infinity.";
+
+    redraw();
+  }
+
+  function resetGame() {
+    board = {};
+    currentPlayer = "O";
+    moveNumber = 0;
+    gameOver = false;
+
+    winningLineIndex = null;
+    winningPlayer = null;
+
+    customViewMatrix = null;
+    customViewMessage = "";
+    currentViewIndex = 0;
+
+    updateStatus(
+      "O's turn",
+      "O"
+    );
+
+    redraw();
+  }
+
+  changeViewButton.addEventListener(
+    "click",
+    changeView
+  );
+
+  resetChartButton.addEventListener(
+    "click",
+    resetChart
+  );
+
+  straightenButton.addEventListener(
+    "click",
+    moveWinningLineToInfinity
+  );
+
+  resetButton.addEventListener(
+    "click",
+    resetGame
+  );
+
+  redraw();
+})();
+</script>
