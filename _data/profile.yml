@@ -3,8 +3,8 @@ secondary_name: 游棫荃
 navbar_name: Yu-Chuan Yu
 
 positions:
-  - name: M.S. in Applied Mathematics
-  - name: National Yang Ming Chiao Tung University
+  - name: Incoming R&D Substitute Service Researcher
+  - name: Institute of Information Science (IIS), Academia Sinica
 
 email: yuyuch0303@gmail.com
 github: yych0303
@@ -12,11 +12,11 @@ github: yych0303
 short_bio_text_justify: false
 short_bio: >-
   <p>
-    I recently received my master's degree in applied mathematics from National Yang Ming Chiao Tung University,
+    I recently received my master's degree in applied mathematics from National Yang Ming Chiao Tung University (NYCU),
     where I worked on combinatorics and matroid theory under the supervision of Prof. Chi Ho Yuen.
   </p>
   <p>
-    I will soon join the Institute of Information Science, Academia Sinica, as an R&amp;D Substitute Service researcher.
+    I will soon join the Institute of Information Science (IIS), Academia Sinica, as an R&amp;D Substitute Service researcher.
     Alongside my continuing interest in matroid theory, I am interested in exploring programming languages,
     type theory, and semantics.
   </p>
@@ -34,42 +34,74 @@ research_interests:
     details: homotopy type theory, programming language semantics, and algebraic geometry
 
 education:
-  - name: National Yang Ming Chiao Tung University
+  - name: National Yang Ming Chiao Tung University (NYCU)
     position: M.S. in Applied Mathematics
-    date: 2026
+    details: Minor, Institute of Communications Engineering
+    date: Sept. 2024 – Jun. 2026
+  - name: National Changhua University of Education (NCUE)
+    position: B.Sc. in Mathematics · Double Major in Computer Science and Information Engineering
+    date: Sep. 2020 – Jun. 2024
 
 experience:
-  - name: Institute of Information Science, Academia Sinica
+  - name: Institute of Information Science (IIS), Academia Sinica
     position: R&D Substitute Service Researcher
     date: Joining soon
-  - name: Institute of Information Science, Academia Sinica
+  - name: Institute of Information Science (IIS), Academia Sinica
     position: Summer Intern · Advisor — Dr. Liang-Ting Chen
     date: Jul.–Aug. 2024
     description: "Bridging Combinatorial and Algebraic Proofs: An Algebraic Approach with Agda"
-    link: /assets/files/bridging-combinatorial-algebraic-proofs-agda.pdf
+    link: /assets/files/research/2024-iis-summer-intern/bridging-combinatorial-algebraic-proofs-agda.pdf
+    repository: https://github.com/yych0303/2024-IIS-summer-intern
 
 teaching:
   - name: Introduction to Combinatorics
-    institution: National Yang Ming Chiao Tung University
-    date: Spring 2026
+    institution: National Yang Ming Chiao Tung University (NYCU)
+    date: 2025–26 · 2nd Semester
   - name: Discrete Mathematics
-    institution: National Yang Ming Chiao Tung University
-    date: Spring 2025
+    institution: National Yang Ming Chiao Tung University (NYCU)
+    date: 2024–25 · 2nd Semester
   - name: Calculus II
-    institution: National Yang Ming Chiao Tung University
-    date: Fall 2024
+    institution: National Yang Ming Chiao Tung University (NYCU)
+    date: 2024–25 · 1st Semester
 
 presentations:
+  - type: Student Talk
+    title: Some Rigidity Criteria for Realization Spaces of Phased Matroids
+    venue: 33rd New-sprout Symposium for Young Combinatorists
+    location: Soochow University (SCU)
+    year: "2026"
+    date_short: Jul 28 · Tue
+    time: 16:10–16:35
+    links:
+      Abstract: /assets/files/presentations/2026-new-sprout-33/rigidity-criteria-phased-matroids-abstract.pdf
+      Handout: /assets/files/presentations/2026-new-sprout-33/rigidity-criteria-phased-matroids-handout.pdf
+  - type: Student Talk
+    title: White’s Conjecture and Stressed Subset Relaxations
+    venue: 33rd New-sprout Symposium for Young Combinatorists
+    location: Soochow University (SCU)
+    year: "2026"
+    date_short: Jul 29 · Wed
+    time: 11:35–12:00
+    links:
+      Abstract: /assets/files/presentations/2026-new-sprout-33/whites-conjecture-stressed-relaxations-abstract.pdf
+      Handout: /assets/files/presentations/2026-new-sprout-33/whites-conjecture-stressed-relaxations-handout.pdf
   - type: Poster Presentation
     title: Realization Spaces of Non-Chirotopal Phased Matroids
-    venue: NCTS Tropical Geometry in Taiwan
-    date: August 11–12, 2025
+    venue: National Center for Theoretical Sciences (NCTS) — Tropical Geometry in Taiwan
+    location: Cosmology Building, National Taiwan University (NTU)
+    year: "2025"
+    date_short: Aug 11–12
+    links:
+      Poster: /assets/files/presentations/2025-ncts-tropical-geometry/non-chirotopal-phased-matroids-poster.pdf
   - type: Student Talk
     title: A Polynomial-Time P-estimating Algorithm for Graph Isomorphism
     venue: 30th New-sprout Symposium for Young Combinatorists
-    date: August 28–29, 2023
+    location: Astronomy-Mathematics Building, National Taiwan University (NTU)
+    year: "2023"
+    date_short: Aug 28–29
   - type: Invited Talk
     title: A Polynomial-Time Approximation Algorithm for Graph Isomorphism
     venue: International Conference on Graph Theory and Combinatorics and the Twelfth Cross-Strait Conference on Graph Theory and Combinatorics
-    date: July 10–13, 2023
-
+    location: National Dong Hwa University (NDHU)
+    year: "2023"
+    date_short: Jul 10–13

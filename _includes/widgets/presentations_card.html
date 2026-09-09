@@ -1,12 +1,44 @@
-<section class="my-3 bg-white shadow-sm rounded-xl">
-  <h2 class="h6 p-3 mb-0 border-bottom border-gray"><i class="fas fa-person-chalkboard"></i> Selected Presentations</h2>
-  <div class="px-3 py-2 small">
+<section class="my-3 bg-white shadow-sm rounded-xl overflow-hidden">
+  <h2 class="h6 p-3 mb-0 border-bottom border-gray">
+    <i class="fas fa-person-chalkboard"></i> Selected Presentations
+  </h2>
+
+  <div class="presentation-list">
     {% for item in site.data.profile.presentations %}
-    <div class="py-2 {% unless forloop.last %}border-bottom border-gray{% endunless %}">
-      <div><strong>{{ item.title }}</strong></div>
-      <div class="text-muted">{{ item.type }} · {{ item.venue }} · <span class="no-break">{{ item.date }}</span></div>
-    </div>
+    <article class="presentation-item {% unless forloop.last %}border-bottom border-gray{% endunless %}">
+      <div class="presentation-date" aria-label="{{ item.date_short }}, {{ item.year }}{% if item.time %}, {{ item.time }}{% endif %}">
+        <span>{{ item.year }}</span>
+        <strong>{{ item.date_short }}</strong>
+        {% if item.time %}<small>{{ item.time }}</small>{% endif %}
+      </div>
+
+      <div class="presentation-body">
+        <span class="presentation-type">{{ item.type }}</span>
+        <h3>{{ item.title }}</h3>
+        {% if item.speaker %}<p class="presentation-speaker">{{ item.speaker }}</p>{% endif %}
+
+        <dl class="presentation-meta">
+          <div>
+            <dt><i class="far fa-calendar" aria-hidden="true"></i><span class="sr-only">Event</span></dt>
+            <dd>{{ item.venue }}</dd>
+          </div>
+          {% if item.location %}
+          <div>
+            <dt><i class="fas fa-location-dot" aria-hidden="true"></i><span class="sr-only">Location</span></dt>
+            <dd>{{ item.location }}</dd>
+          </div>
+          {% endif %}
+        </dl>
+
+        {% if item.links %}
+        <div class="presentation-links">
+          {% for link in item.links %}
+          <a href="{{ link[1] | relative_url }}" target="_blank" rel="noopener"><i class="far fa-file-pdf" aria-hidden="true"></i> {{ link[0] }}</a>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </article>
     {% endfor %}
   </div>
 </section>
-

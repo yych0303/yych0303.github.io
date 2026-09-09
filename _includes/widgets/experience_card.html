@@ -7,7 +7,11 @@
             <div class="mx-2 my-1">
               <h2 class="h6"><i class="fas fa-graduation-cap"></i> Education</h2>
               {% for item in site.data.profile.education %}
-              <div class="mb-2"><div>{{ item.name }}</div><div class="small d-flex"><span>{{ item.position }}</span><em class="ml-auto no-break">{{ item.date }}</em></div></div>
+              <div class="mb-3">
+                <div>{{ item.name }}</div>
+                <div class="small d-flex"><span>{{ item.position }}</span><em class="ml-auto no-break">{{ item.date }}</em></div>
+                {% if item.details %}<div class="small text-muted">{{ item.details }}</div>{% endif %}
+              </div>
               {% endfor %}
             </div>
           </div>
@@ -15,7 +19,15 @@
             <div class="mx-2 my-1">
               <h2 class="h6"><i class="fas fa-flask"></i> Experience</h2>
               {% for item in site.data.profile.experience %}
-              <div class="mb-3"><div>{{ item.name }}</div><div class="small d-flex"><span>{{ item.position }}</span><em class="ml-auto no-break">{{ item.date }}</em></div>{% if item.description %}<div class="small text-muted">{{ item.description }}</div>{% endif %}{% if item.link %}<a class="small" href="{{ item.link | relative_url }}"><i class="fas fa-file-pdf"></i> Project report</a>{% endif %}</div>
+              <div class="mb-3">
+                <div>{{ item.name }}</div>
+                <div class="small d-flex"><span>{{ item.position }}</span><em class="ml-auto no-break">{{ item.date }}</em></div>
+                {% if item.description %}<div class="small text-muted">{{ item.description }}</div>{% endif %}
+                <div class="small experience-links">
+                  {% if item.link %}<a href="{{ item.link | relative_url }}"><i class="fas fa-file-pdf"></i> Project report</a>{% endif %}
+                  {% if item.repository %}<a href="{{ item.repository }}" target="_blank" rel="noopener"><i class="fab fa-github"></i> Repository</a>{% endif %}
+                </div>
+              </div>
               {% endfor %}
             </div>
           </div>
@@ -33,4 +45,3 @@
     </div>
   </div>
 </section>
-

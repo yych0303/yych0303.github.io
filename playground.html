@@ -1,0 +1,22 @@
+---
+layout: default
+title: Playground
+navbar_title: Playground
+---
+
+<div class="row justify-content-center">
+  <div class="col-xl-10 col-lg-11">
+    <section class="playground-page bg-white shadow-sm rounded-xl overflow-hidden">
+      <header class="playground-header p-4 border-bottom border-gray">
+        <div>
+          <span class="playground-label"><i class="fas fa-gamepad"></i> Interactive mathematics</span>
+          <h1 class="h3 mt-2 mb-2">Projective Tic-Tac-Toe over F₃</h1>
+          <p class="text-muted mb-0">A small interactive experiment in finite projective geometry.</p>
+        </div>
+      </header>
+      <div class="game-container p-2 p-md-4">
+        {% include pg23-tictactoe.html %}
+      </div>
+    </section>
+  </div>
+</div>

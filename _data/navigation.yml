@@ -4,5 +4,4 @@ pages:
   - name: Publications
     url: /publications
   - name: Playground
-    url: /#playground
-
+    url: /playground

@@ -1,6 +1,6 @@
 <div class="row sticky-top profile-sticky">
-  <div class="col">
-    <div class="card border-0 shadow-sm bg-white">
+  <div class="col profile-sidebar-stack">
+    <div class="card profile-card border-0 shadow-sm bg-white">
       <div class="card-body px-4 py-4 text-center">
         <div class="profile-monogram mb-3" aria-hidden="true">YY</div>
         <h1 class="h4 mb-1">{{ site.data.profile.primary_name }}</h1>
@@ -14,6 +14,8 @@
         </div>
       </div>
     </div>
+    {% if site.data.display.homepage.show_news %}
+      {% include widgets/news_card.html limit=site.data.display.homepage.num_news embedded=true %}
+    {% endif %}
   </div>
 </div>
-

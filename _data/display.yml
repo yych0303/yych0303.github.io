@@ -3,9 +3,7 @@ homepage:
   show_news: true
   show_selected_publications: true
   show_presentations: true
-  show_playground: true
   num_news: 10
 
 footer_text: >-
   <a href="https://github.com/luost26/academic-homepage" target="_blank" rel="noopener"><i class="fas fa-pencil-ruler"></i> academic-homepage</a>
-

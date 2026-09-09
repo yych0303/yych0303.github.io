@@ -3,7 +3,7 @@ title: White's Conjecture for Paving Matroids
 authors:
   - Yu-Chuan Yu
   - Chi Ho Yuen
-pub: Preprint
+pub: Under submission
 pub_date: 2025
 date: 2025-10-01
 selected: true
@@ -13,4 +13,3 @@ links:
   PDF: https://arxiv.org/pdf/2510.04163
   BibTeX: https://arxiv.org/bibtex/2510.04163
 ---
-

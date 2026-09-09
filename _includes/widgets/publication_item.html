@@ -9,8 +9,19 @@
       <p class="mt-0 mb-0 small">{% include widgets/author_list.html authors=item.authors %}</p>
       <p class="mt-0 mb-0 small"><i>{{ item.pub }}</i>{% if item.pub_date %}, {{ item.pub_date }}{% endif %}</p>
       <p class="mt-1 mb-0 small text-muted">{{ item.abstract }}</p>
-      <p class="small mb-0 abstract-links">{% for link in item.links %}<a target="_blank" rel="noopener" href="{{ link[1] }}">[{{ link[0] }}]</a> {% endfor %}</p>
+      {% if item.links and item.links.size > 0 %}
+      <div class="publication-links">
+        {% for link in item.links %}
+        <a target="_blank" rel="noopener" href="{{ link[1] }}">
+          {% if link[0] == "PDF" %}<i class="far fa-file-pdf" aria-hidden="true"></i>
+          {% elsif link[0] == "BibTeX" %}<i class="fas fa-quote-right" aria-hidden="true"></i>
+          {% elsif link[0] == "arXiv" %}<i class="fas fa-file-lines" aria-hidden="true"></i>
+          {% else %}<i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>{% endif %}
+          {{ link[0] }}
+        </a>
+        {% endfor %}
+      </div>
+      {% endif %}
     </div>
   </div>
 </article>
-
