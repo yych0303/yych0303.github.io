@@ -1,0 +1,19 @@
+<div class="row sticky-top profile-sticky">
+  <div class="col">
+    <div class="card border-0 shadow-sm bg-white">
+      <div class="card-body px-4 py-4 text-center">
+        <div class="profile-monogram mb-3" aria-hidden="true">YY</div>
+        <h1 class="h4 mb-1">{{ site.data.profile.primary_name }}</h1>
+        {% if site.data.profile.secondary_name %}<div class="text-muted mb-2">{{ site.data.profile.secondary_name }}</div>{% endif %}
+        <div class="small">
+          {% for position in site.data.profile.positions %}{{ position.name }}{% unless forloop.last %}<br>{% endunless %}{% endfor %}
+        </div>
+        <div class="small mt-2"><a class="email-text" href="mailto:{{ site.data.profile.email }}">{{ site.data.profile.email | replace: "@", " (at) " }}</a></div>
+        <div class="h4 mt-3 mb-0">
+          {% if site.data.profile.github %}<a class="px-1" aria-label="GitHub" target="_blank" rel="noopener" href="https://github.com/{{ site.data.profile.github }}"><i class="fab fa-github"></i></a>{% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

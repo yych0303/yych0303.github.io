@@ -1,0 +1,75 @@
+primary_name: Yu-Chuan Yu
+secondary_name: 游棫荃
+navbar_name: Yu-Chuan Yu
+
+positions:
+  - name: M.S. in Applied Mathematics
+  - name: National Yang Ming Chiao Tung University
+
+email: yuyuch0303@gmail.com
+github: yych0303
+
+short_bio_text_justify: false
+short_bio: >-
+  <p>
+    I recently received my master's degree in applied mathematics from National Yang Ming Chiao Tung University,
+    where I worked on combinatorics and matroid theory under the supervision of Prof. Chi Ho Yuen.
+  </p>
+  <p>
+    I will soon join the Institute of Information Science, Academia Sinica, as an R&amp;D Substitute Service researcher.
+    Alongside my continuing interest in matroid theory, I am interested in exploring programming languages,
+    type theory, and semantics.
+  </p>
+  <p class="mb-0">
+    <strong>Research perspective:</strong> I am interested in how local combinatorial data can force global algebraic
+    or geometric structure.
+  </p>
+
+research_interests:
+  - name: Matroid Theory
+    details: White's conjecture, paving and split matroids, relaxation operations, and matroid toric ideals
+  - name: Realization Spaces
+    details: phased matroids, rigidity phenomena, and Grassmannian strata
+  - name: Topics I Hope to Explore
+    details: homotopy type theory, programming language semantics, and algebraic geometry
+
+education:
+  - name: National Yang Ming Chiao Tung University
+    position: M.S. in Applied Mathematics
+    date: 2026
+
+experience:
+  - name: Institute of Information Science, Academia Sinica
+    position: R&D Substitute Service Researcher
+    date: Joining soon
+  - name: Institute of Information Science, Academia Sinica
+    position: Summer Intern · Advisor — Dr. Liang-Ting Chen
+    date: Jul.–Aug. 2024
+    description: "Bridging Combinatorial and Algebraic Proofs: An Algebraic Approach with Agda"
+    link: /assets/files/bridging-combinatorial-algebraic-proofs-agda.pdf
+
+teaching:
+  - name: Introduction to Combinatorics
+    institution: National Yang Ming Chiao Tung University
+    date: Spring 2026
+  - name: Discrete Mathematics
+    institution: National Yang Ming Chiao Tung University
+    date: Spring 2025
+  - name: Calculus II
+    institution: National Yang Ming Chiao Tung University
+    date: Fall 2024
+
+presentations:
+  - type: Poster Presentation
+    title: Realization Spaces of Non-Chirotopal Phased Matroids
+    venue: NCTS Tropical Geometry in Taiwan
+    date: August 11–12, 2025
+  - type: Student Talk
+    title: A Polynomial-Time P-estimating Algorithm for Graph Isomorphism
+    venue: 30th New-sprout Symposium for Young Combinatorists
+    date: August 28–29, 2023
+  - type: Invited Talk
+    title: A Polynomial-Time Approximation Algorithm for Graph Isomorphism
+    venue: International Conference on Graph Theory and Combinatorics and the Twelfth Cross-Strait Conference on Graph Theory and Combinatorics
+    date: July 10–13, 2023
+

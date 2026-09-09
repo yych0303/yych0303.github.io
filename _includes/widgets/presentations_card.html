@@ -1,0 +1,12 @@
+<section class="my-3 bg-white shadow-sm rounded-xl">
+  <h2 class="h6 p-3 mb-0 border-bottom border-gray"><i class="fas fa-person-chalkboard"></i> Selected Presentations</h2>
+  <div class="px-3 py-2 small">
+    {% for item in site.data.profile.presentations %}
+    <div class="py-2 {% unless forloop.last %}border-bottom border-gray{% endunless %}">
+      <div><strong>{{ item.title }}</strong></div>
+      <div class="text-muted">{{ item.type }} · {{ item.venue }} · <span class="no-break">{{ item.date }}</span></div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+

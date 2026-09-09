@@ -1,0 +1,16 @@
+---
+layout: default
+title: Publications
+navbar_title: Publications
+---
+
+<div class="row">
+  <div class="col-12">
+    <section class="bg-white shadow-sm rounded-xl">
+      <h1 class="h4 p-4 mb-0 border-bottom border-gray"><i class="fas fa-book"></i> Publications</h1>
+      {% assign pubs = site.publications | sort: "date" | reverse %}
+      {% for item in pubs %}{% include widgets/publication_item.html item=item hide_bottom_border=forloop.last %}{% endfor %}
+    </section>
+  </div>
+</div>
+
